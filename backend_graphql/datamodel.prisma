@@ -1,0 +1,13 @@
+type Rocket {
+  name: String!
+  country: String!
+  cost: Int!
+  id: ID! @unique
+  payloadLeo: Int
+  payloadGto:Int
+  kgLeo: Int
+  kgGto: Int
+
+}
+
+
