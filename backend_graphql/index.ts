@@ -6,13 +6,11 @@ import datamodelInfo from './generated/nexus-prisma'
 
 const Query = prismaObjectType({ 
   name: 'Query',
-  // definition: t => t.prismaFields(['pokemons', 'stats'])
-  definition: t => t.prismaFields(['rocket', 'rockets', 'rocketsConnection'])
+  definition: t => t.prismaFields(['character', 'characters'])
 })
 const Mutation = prismaObjectType({ 
   name: 'Mutation',
-  // definition: t => t.prismaFields(['createPokemon', 'createStat'])
-  definition: t => t.prismaFields(['createRocket', 'updateRocket', 'deleteRocket'])
+  definition: t => t.prismaFields(['createCharacter','updateMoves','deleteMoves'])
 })
 
 const schema = makePrismaSchema({
@@ -33,4 +31,4 @@ const server = new GraphQLServer({
   schema,
   context: { prisma }
 })
-server.start(() => console.log(`Server is running on http://localhost:4000`))
+server.start(() => console.log(`Server is running on http://192.168.99.100:4499/`))
