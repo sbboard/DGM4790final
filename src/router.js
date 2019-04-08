@@ -1,6 +1,6 @@
 import Vue from "vue"
 import Router from "vue-router"
-import Home from "./App.vue"
+import Home from "./components/viewer.vue"
 import character from "./components/characterManager.vue"
 import series from "./components/seriesManage.vue"
 
