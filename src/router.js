@@ -1,6 +1,8 @@
 import Vue from "vue"
 import Router from "vue-router"
-import Home from "./components/App.vue"
+import Home from "./App.vue"
+import character from "./components/characterManager.vue"
+import series from "./components/seriesManage.vue"
 
 Vue.use(Router);
 
@@ -11,6 +13,16 @@ export default new Router({
     path: "/",
     name: "home",
     component: Home
+    },
+    {
+    path: "/",
+    name: "character manager",
+    component: character
+    },
+    {
+    path: "/",
+    name: "series manager",
+    component: series
     },
   ]
 });
