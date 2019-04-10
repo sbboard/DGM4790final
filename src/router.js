@@ -15,12 +15,12 @@ export default new Router({
     component: Home
     },
     {
-    path: "/",
+    path: "/charMan",
     name: "character manager",
     component: character
     },
     {
-    path: "/",
+    path: "/seriesMan",
     name: "series manager",
     component: series
     },
