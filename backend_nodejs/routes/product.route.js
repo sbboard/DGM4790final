@@ -1,20 +1,27 @@
 const express = require('express')
 const router = express.Router()
 
-const product_controller = require('../controllers/product.controller')
+const series_controller = require('../controllers/series.controller')
 
-router.get('/people', product_controller.person_list)
+//list of series
+router.get('/list/series', series_controller.person_list)
 
-router.get('/cats', product_controller.cat_list)
+//members of specific series
+router.get('/:series/characters', series_controller.person_list)
 
-router.post('/create', product_controller.product_create)
+//list all characters that have been assigned to a series
+router.get('/list/characters', series_controller.person_list)
 
-router.put('/:id/update', product_controller.product_update)
+//create
+router.post('/create', series_controller.product_create)
 
-router.delete('/:id/delete', product_controller.product_delete)
+//assign person to series
+router.put('/:id/update', series_controller.product_update)
 
-router.get('/:id', product_controller.person_info)
+//remove person from series
+router.delete('/:id/delete', series_controller.product_delete)
 
-router.get('/', product_controller.whole_list)
+//everything
+router.get('/', series_controller.whole_list)
 
 module.exports = router
