@@ -1,6 +1,14 @@
 <template>
-  <div>
-    <router-view/>
+  <div id="container">
+    <header>Smash Bros Series Viewer</header>
+    <nav>
+      <router-link class="navItem" to="/">Viewer</router-link>
+      <router-link class="navItem" to="/charMan">Character Series (GraphQL)</router-link>
+      <router-link class="navItem" to="/seriesMan">Series Manager (nodeJS)</router-link>
+    </nav>
+    <div id="content">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -11,13 +19,29 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+html
+  margin: 0
+  padding: 0
+  body
+    margin: 0
+    padding: 0
+    #container
+      width: 100%
+      max-width: 1000px
+      display: block
+      margin: 0 auto
+      background-color: red
+      min-height: 100vh
+      header
+        font-size: 2em
+        text-align: center
+        padding: .25em 0
+      nav
+        display: flex
+        padding: 1em
+        .navItem
+          margin-right: 1em
+      #content
+        padding: 1em
 </style>
