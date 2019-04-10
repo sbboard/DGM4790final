@@ -8,9 +8,9 @@ exports.series_list = (req, res, next) => {
     })
 }
 
-//DONE?
+//DONE
 exports.member_list = (req, res, next) => {
-    Series.find({name:req.params.series}).select('members').exec((err,personList) => {
+    Series.find({name:req.params.series}).select('characters').exec((err,personList) => {
         if (err) return next(err)
         res.send(personList)
     })
