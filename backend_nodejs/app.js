@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const dbpass = require('./secret.js')
+const dbpass = require('./mondopass.js')
 
 const dev_db_url = `mongodb+srv://buffum:${dbpass}@cluster0-yj7ng.mongodb.net/series`
 const mongoDB = process.env.MONGODB_URI || dev_db_url

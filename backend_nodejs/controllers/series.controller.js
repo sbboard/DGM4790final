@@ -1,7 +1,7 @@
 const Series = require('../models/series.model')
 
 //list of series
-exports.category_list = (req, res, next) => {
+exports.series_list = (req, res, next) => {
     Product.find({category:req.params.cat}).sort('-date').exec((err,personList) => {
         if (err) return next(err)
         res.send(personList)
@@ -9,7 +9,7 @@ exports.category_list = (req, res, next) => {
 }
 
 //members of specific series
-exports.category_list = (req, res, next) => {
+exports.member_list = (req, res, next) => {
     Product.find({category:req.params.cat}).sort('-date').exec((err,personList) => {
         if (err) return next(err)
         res.send(personList)
@@ -17,7 +17,7 @@ exports.category_list = (req, res, next) => {
 }
 
 //list all characters that have been assigned to a series
-exports.category_list = (req, res, next) => {
+exports.all_chars = (req, res, next) => {
     Product.find({category:req.params.cat}).sort('-date').exec((err,personList) => {
         if (err) return next(err)
         res.send(personList)
@@ -25,9 +25,7 @@ exports.category_list = (req, res, next) => {
 }
 
 //create
-exports.product_create = (req, res, next) => {
-    let name = req.files.img.name;
-    req.files.img.mv('/var/www/html/assets/contentImages/'+name)
+exports.series_create = (req, res, next) => {
     let product = new Product({
         title: req.body.title,
         subtitle: req.body.subtitle,
@@ -47,7 +45,7 @@ exports.product_create = (req, res, next) => {
 }
 
 //assign person to series
-exports.product_update = (req, res, next) => {
+exports.person_assign = (req, res, next) => {
     Product.findByIdAndUpdate(req.params.id, { $set: req.body},
         (err, product) => {
         if (err) return next(err)
@@ -56,7 +54,7 @@ exports.product_update = (req, res, next) => {
 }
 
 //remove person from series
-exports.product_delete = (req, res, next) => {
+exports.person_remove = (req, res, next) => {
     Product.findByIdAndRemove(req.params.id, (err) => {
         if (err) return next(err)
         res.send('Deleted successfully')
@@ -64,7 +62,7 @@ exports.product_delete = (req, res, next) => {
 }
 
 //everything
-exports.whole_list = (req, res, next) => {
+exports.everything = (req, res, next) => {
     Product.find({}).sort('-date').exec((err,personList) => {
         if (err) return next(err)
         if(isNaN(req.params.num)){
