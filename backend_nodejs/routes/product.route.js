@@ -16,7 +16,7 @@ router.get('/list/characters', series_controller.all_chars)
 router.post('/create', series_controller.series_create)
 
 //assign person to series
-router.put('/:id/update', series_controller.person_assign)
+router.put('/assign', series_controller.person_assign)
 
 //remove person from series
 router.delete('/:id/delete', series_controller.person_remove)

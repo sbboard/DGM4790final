@@ -8,9 +8,9 @@ exports.series_list = (req, res, next) => {
     })
 }
 
-//members of specific series
+//DONE?
 exports.member_list = (req, res, next) => {
-    Product.find({category:req.params.cat}).sort('-date').exec((err,personList) => {
+    Series.find({name:req.params.series}).select('members').exec((err,personList) => {
         if (err) return next(err)
         res.send(personList)
     })
@@ -41,12 +41,12 @@ exports.series_create = (req, res, next) => {
     })
 }
 
-//assign person to series
+//DONE
 exports.person_assign = (req, res, next) => {
-    Product.findByIdAndUpdate(req.params.id, { $set: req.body},
-        (err, product) => {
+    Series.updateOne({name:req.body.name}, { $push: { characters: req.body.character}},
+        (err) => {
         if (err) return next(err)
-        res.send("Content updated")
+        res.send("Character Assigned")
     })
 }
 
