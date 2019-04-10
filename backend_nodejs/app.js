@@ -19,7 +19,7 @@ const product = require('./routes/product.route')
 
 app.use('/api', product)
 
-const port = (process.env.PORT || 8128)
+const port = (process.env.PORT || 8666)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
