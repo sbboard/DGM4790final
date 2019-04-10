@@ -1,8 +1,8 @@
 const Series = require('../models/series.model')
 
-//list of series
+//DONE
 exports.series_list = (req, res, next) => {
-    Product.find({category:req.params.cat}).sort('-date').exec((err,personList) => {
+    Series.find({}).sort('debutYear').select('name -_id').exec((err,personList) => {
         if (err) return next(err)
         res.send(personList)
     })
@@ -24,23 +24,20 @@ exports.all_chars = (req, res, next) => {
     })
 }
 
-//create
+//DONE
 exports.series_create = (req, res, next) => {
-    let product = new Product({
-        title: req.body.title,
-        subtitle: req.body.subtitle,
-        img: name,
-        url: req.body.url,
-        category: req.body.category,
-        date: Date(),
-        series: req.body.series
+    let product = new Series({
+        name: req.body.name,
+        characters: [],
+        firstParty: req.body.firstParty,
+        debutYear: req.body.debutYear,
+        firstSmash: req.body.firstSmash,
     })
-
     product.save((err) => {
         if (err){
             return next(err)
         }
-        res.send('Content Posted')
+        res.send('Series Created')
     })
 }
 
@@ -61,15 +58,10 @@ exports.person_remove = (req, res, next) => {
     })
 }
 
-//everything
+//DONE
 exports.everything = (req, res, next) => {
-    Product.find({}).sort('-date').exec((err,personList) => {
+    Series.find({}).sort('debutYear').exec((err,personList) => {
         if (err) return next(err)
-        if(isNaN(req.params.num)){
-            res.send(personList)
-        }
-        else{
-            res.send(personList.slice(0,req.params.num))
-        }
+        res.send(personList)
     })
 }
