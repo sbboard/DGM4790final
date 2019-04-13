@@ -3,7 +3,7 @@
     <header>Smash Bros Series Viewer</header>
     <nav>
       <router-link class="navItem" to="/">Viewer</router-link>
-      <router-link class="navItem" to="/charMan">Character Series (GraphQL)</router-link>
+      <router-link class="navItem" to="/charMan">Character Manager (GraphQL)</router-link>
       <router-link class="navItem" to="/seriesMan">Series Manager (nodeJS)</router-link>
     </nav>
     <div id="content">

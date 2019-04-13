@@ -1,7 +1,7 @@
 const Series = require('../models/series.model')
 
 exports.series_list = (req, res, next) => {
-    Series.find({}).sort('debutYear').select('name -_id').exec((err,personList) => {
+    Series.find({}).sort('debutYear').select('name').exec((err,personList) => {
         if (err) return next(err)
         res.send(personList)
     })
