@@ -12,19 +12,12 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 const app = express()
 
-app.use(function (req, res, next) {
-    var whitelist = [
-      'http://159.65.188.38',
-      'http://192.168.56.1:8080',
-    ];
-    var origin = req.headers.origin;
-    if (whitelist.indexOf(origin) > -1) {
-      res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
-    return next();
-});
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 const product = require('./routes/product.route')
