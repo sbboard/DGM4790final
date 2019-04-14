@@ -4,10 +4,10 @@ services:
     image: prismagraphql/prisma:1.27
     restart: always
     ports:
-    - "4499:4499"
+    - "4511:4511"
     environment:
       PRISMA_CONFIG: |
-        port: 4499
+        port: 4511
         managementApiSecret: discoSucks
         databases:
           default:

@@ -2,7 +2,7 @@ const { GraphQLClient } = require('graphql-request')
 const http = require("http");
 const API_URL = "http://beta-api-kuroganehammer.azurewebsites.net/api/characters/"
 
-const client = new GraphQLClient('http://192.168.99.100:4499/')
+const client = new GraphQLClient('http://192.168.99.100:4511/')
 
 const characterMutation = `mutation createCharacter(
     $name: String!,

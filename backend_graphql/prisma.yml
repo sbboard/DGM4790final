@@ -1,4 +1,4 @@
-endpoint: http://192.168.99.100:4499/
+endpoint: http://192.168.99.100:4511/
 datamodel: datamodel.prisma
 
 generate:
