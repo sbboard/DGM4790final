@@ -30,7 +30,7 @@
             
             <label>Assign to...</label>
             <select name="assignSeries">
-                <option :value="item.name" v-for="(item, id) in listOfSeries" :key="`${id}`">{{item.name}}</option>
+                <option :value="item.name" v-for="item in listOfSeries" :key="item._id">{{item.name}}</option>
             </select>
             <input type="submit"/>
         </form>
@@ -39,7 +39,7 @@
         <form @submit.prevent="deleteTool()">
             <label>Series</label>
             <select name="deleteSeries">
-                <option :value="item._id" v-for="(item, id) in listOfSeries" :key="`${id}`">{{item.name}}</option>
+                <option :value="item._id" v-for="item in listOfSeries" :key="item._id">{{item.name}}</option>
             </select>
             <input type="submit"/>
         </form>
@@ -77,6 +77,7 @@ export default {
             .then(response => {
                 // eslint-disable-next-line
                 console.log(response.data)
+                this.getSeries()
             })
             .catch(error => {
                 // eslint-disable-next-line
@@ -98,8 +99,8 @@ export default {
             .catch(error => {
                 // eslint-disable-next-line
                 console.log(error.message);
+                this.getSeries()
             })
-            this.getSeries()
         },
         deleteTool(){
             const id= document.getElementsByName("deleteSeries")[0].value
@@ -107,8 +108,8 @@ export default {
             .then(response => {
                 // eslint-disable-next-line
                 console.log(response.data)
+                this.getSeries()
             })
-            this.getSeries()
         },
     }
 }
