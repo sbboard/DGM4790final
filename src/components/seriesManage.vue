@@ -24,8 +24,8 @@
         <h2>Assign Character to Series</h2>
         <form @submit.prevent="assign()">
             <label>Unassigned Character</label>
-            <select name="assignCharacterNoSeries">
-                <option value='jimboy'>JimBoy</option>
+            <select name="assignSeries">
+                <option :value="item.name" v-for="item in characters" :key="item._id">{{item.name}}</option>
             </select>
             
             <label>Assign to...</label>
@@ -48,15 +48,21 @@
 
 <script>
 import axios from 'axios'
+import gql from 'graphql-tag'
 
 export default {
     data(){
         return{
-            listOfSeries: []
+            listOfSeries: [],
+            characters: [],
         }
     },
     mounted () {
         this.getSeries()
+    },
+    apollo: {
+        // Simple query that will update the 'hello' vue property
+        characters: gql`query getCharacterNames{characters{name}}`,
     },
     methods:{
         getSeries(){
