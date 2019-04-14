@@ -78,6 +78,8 @@ export default {
                 // eslint-disable-next-line
                 console.log(response.data)
                 this.getSeries()
+                document.getElementsByName("name")[0].value = ""
+                document.getElementsByName("debutYear")[0].value = ""
             })
             .catch(error => {
                 // eslint-disable-next-line
