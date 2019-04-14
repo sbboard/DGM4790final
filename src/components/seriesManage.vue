@@ -22,6 +22,18 @@
         </form>
 
         <h2>Assign Character to Series</h2>
+        <form @submit.prevent="assign()">
+            <label>Unassigned Character</label>
+            <select name="assignCharacterNoSeries">
+                <option value='jimboy'>JimBoy</option>
+            </select>
+            
+            <label>Assign to...</label>
+            <select name="assignSeries">
+                <option :value="item.name" v-for="(item, id) in listOfSeries" :key="`${id}`">{{item.name}}</option>
+            </select>
+            <input type="submit"/>
+        </form>
 
         <h2>Series Deletion Tool</h2>
     </div>
@@ -37,9 +49,12 @@ export default {
         }
     },
     mounted () {
-        axios.get(`http://192.168.56.1:8666/api/list/series`).then(response => (this.listOfSeries = response.data))
+        this.getSeries()
     },
     methods:{
+        getSeries(){
+            axios.get(`http://192.168.56.1:8666/api/list/series`).then(response => (this.listOfSeries = response.data))
+        },
         create(){
             const name= document.getElementsByName("name")[0].value
             const firstParty= document.getElementsByName("firstParty")[0].value
@@ -60,6 +75,24 @@ export default {
                 // eslint-disable-next-line
                 console.log(error.message);
             })
+        },
+        assign(){
+            const name= document.getElementsByName("assignSeries")[0].value
+            const character= document.getElementsByName("assignCharacterNoSeries")[0].value
+            axios
+            .put('http://192.168.56.1:8666/api/assign',{
+                name: name,
+                character: character
+            })
+            .then(response => {
+                // eslint-disable-next-line
+                console.log(response.data)
+            })
+            .catch(error => {
+                // eslint-disable-next-line
+                console.log(error.message);
+            })
+            this.getSeries()
         },
         delete(id){
             axios.get(`http://192.168.56.1:8666/api/${id}/delete`)
