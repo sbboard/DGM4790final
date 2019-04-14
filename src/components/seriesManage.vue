@@ -36,6 +36,13 @@
         </form>
 
         <h2>Series Deletion Tool</h2>
+        <form @submit.prevent="deleteTool()">
+            <label>Series</label>
+            <select name="deleteSeries">
+                <option :value="item._id" v-for="(item, id) in listOfSeries" :key="`${id}`">{{item.name}}</option>
+            </select>
+            <input type="submit"/>
+        </form>
     </div>
 </template>
 
@@ -94,12 +101,14 @@ export default {
             })
             this.getSeries()
         },
-        delete(id){
-            axios.get(`http://192.168.56.1:8666/api/${id}/delete`)
+        deleteTool(){
+            const id= document.getElementsByName("deleteSeries")[0].value
+            axios.delete(`http://192.168.56.1:8666/api/${id}/delete`)
             .then(response => {
                 // eslint-disable-next-line
                 console.log(response.data)
             })
+            this.getSeries()
         },
     }
 }
