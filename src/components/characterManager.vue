@@ -1,30 +1,51 @@
 <template>
-    <div>Series Manager
-        <h2>Assign Character to Series</h2>
-        name = input
-        debut year = input
-        first smash (dropdown all smash titles name=smash 64 value=1)
-        nintendo property? radio button
-        <select>
-            <option :value="item.name" v-for="(item, id) in listOfSeries" :key="`${id}`">{{item.name}}</option>
-        </select>
-
-        <h2>Assign Character to Series</h2>
+    <div>
+        <h1>Character Manager</h1>
+        <h2>Create Character</h2>
+        <form @submit.prevent="createCharacter()">
+            <label>New Character Name:</label>
+            <input required name="newName"/>
+            <input type="submit"/>
+        </form>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+import gql from 'graphql-tag'
+//import axios from 'axios'
 
 export default {
     data(){
         return{
-            listOfSeries: []
         }
     },
-    mounted () {
-        axios.get(`http://192.168.56.1:8666/api/list/series`).then(response => (this.listOfSeries = response.data))
-    },
+    methods: {
+        createCharacter(){
+            const newName= document.getElementsByName("newName")[0].value
+            // Mutation
+            this.$apollo.mutate({
+                mutation: gql`mutation ($name: String!){
+                    createCharacter(data:{
+                        name: $name
+                    })
+                    {
+                        name
+                        id
+                    }
+                }`,
+                variables: {
+                    name: newName,
+                },
+            }).then((data) => {
+                // eslint-disable-next-line
+                console.log(data)
+                document.getElementsByName("newName")[0].value = ""
+            }).catch((error) => {
+                // eslint-disable-next-line
+                console.error(error)
+            })
+        }
+    }
 }
 </script>
 

@@ -55,6 +55,8 @@ export default {
         return{
             listOfSeries: [],
             characters: [],
+            listOfCharactersAssigned: [],
+            unassignedCharacters: []
         }
     },
     mounted () {
@@ -63,6 +65,11 @@ export default {
     apollo: {
         // Simple query that will update the 'hello' vue property
         characters: gql`query getCharacterNames{characters{name}}`,
+    },
+    watch: {
+        characters(){
+
+        }
     },
     methods:{
         getSeries(){
