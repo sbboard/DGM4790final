@@ -10,7 +10,7 @@ const Query = prismaObjectType({
 })
 const Mutation = prismaObjectType({ 
   name: 'Mutation',
-  definition: t => t.prismaFields(['createCharacter','updateMoves','deleteMoves'])
+  definition: t => t.prismaFields(['createCharacter','updateMoves','deleteMoves','deleteCharacter'])
 })
 
 const schema = makePrismaSchema({
