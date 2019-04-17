@@ -14,6 +14,15 @@
             </select>
             <input type="submit"/>
         </form>
+        <h2>Change Character Name</h2>
+        <form @submit.prevent="changeName()">
+            <select name="characterName">
+                    <option :value="item.name" :id="item.id" v-for="item in characters" :key="item.id">{{item.name}}</option>
+            </select>
+            <label>New Name:</label>
+            <input name="newNewName"/>
+            <input type="submit"/>
+        </form>
     </div>
 </template>
 
@@ -82,6 +91,36 @@ export default {
                 console.log(data.data.deleteCharacter.id)
                 //console.log(document.getElementById(data.id))
                 document.getElementById(data.data.deleteCharacter.id).remove()
+            }).catch((error) => {
+                // eslint-disable-next-line
+                console.error(error)
+            })
+        },
+        changeName(){
+            const oldName= document.getElementsByName("characterName")[0].value
+            const newName= document.getElementsByName("newNewName")[0].value
+            // Mutation
+            this.$apollo.mutate({
+                mutation: gql`mutation ($newName: String!, $oldName: String!){
+                updateCharacter(data:{
+                    name:$newName
+                }
+                where:{
+                    name:$oldName
+                }){
+                    name
+                    id
+                }
+                }`,
+                variables: {
+                    newName: newName,
+                    oldName: oldName
+                },
+            }).then((data) => {
+                // eslint-disable-next-line
+                console.error(data)
+                //document.getElementById(data.data.deleteCharacter.id).innerHTML = newName
+                document.getElementsByName("newNewName")[0].value = ""
             }).catch((error) => {
                 // eslint-disable-next-line
                 console.error(error)
