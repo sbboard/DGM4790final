@@ -25,7 +25,7 @@
         <form @submit.prevent="assign()">
             <label>Unassigned Character</label>
             <select name="assignSeries">
-                <option :value="item.name" v-for="item in characters" :key="item._id">{{item.name}}</option>
+                <option v-for="item in unassignedCharacters" :key="item._id">{{item}}</option>
             </select>
             
             <label>Assign to...</label>
@@ -61,6 +61,7 @@ export default {
     },
     mounted () {
         this.getSeries()
+        this.getAssignedCharacters()
     },
     apollo: {
         // Simple query that will update the 'hello' vue property
@@ -68,12 +69,19 @@ export default {
     },
     watch: {
         characters(){
-
+            for(let i=0; i<this.characters.length;i++){
+                if(this.listOfCharactersAssigned.indexOf(this.characters[i].name) < 0){
+                    this.unassignedCharacters.push(this.characters[i].name)
+                }
+            }
         }
     },
     methods:{
         getSeries(){
             axios.get(`http://192.168.56.1:8666/api/list/series`).then(response => (this.listOfSeries = response.data))
+        },
+        getAssignedCharacters(){
+            axios.get(`http://192.168.56.1:8666/api/list/characters`).then(response => (this.listOfCharactersAssigned = response.data))
         },
         create(){
             const name= document.getElementsByName("name")[0].value
