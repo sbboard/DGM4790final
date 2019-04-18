@@ -1,27 +1,37 @@
 <template>
     <div>
         <h1>Character Manager</h1>
-        <h2>Create Character</h2>
+        <h2 class="my-4">Create Character</h2>
         <form @submit.prevent="createCharacter()">
+            <div class="form-group">
             <label>New Character Name:</label>
-            <input required name="newName"/>
-            <input type="submit"/>
+            <input class="form-control" required name="newName"/>
+            </div>
+            <input class="btn btn-primary" type="submit"/>
         </form>
-        <h2>Delete Character</h2>
+        <h2 class="my-4">Delete Character</h2>
         <form @submit.prevent="deleteCharacter()">
-            <select name="deleteChar">
+            <div class="form-group">
+            <label>Character to Delete:</label>
+            <select class="form-control" name="deleteChar">
                 <option :value="item.name" :id="item.id" v-for="item in characters" :key="item.id">{{item.name}}</option>
             </select>
-            <input type="submit"/>
+            </div>
+            <input class="btn btn-primary" type="submit"/>
         </form>
-        <h2>Change Character Name</h2>
+        <h2 class="my-4">Change Character Name</h2>
         <form @submit.prevent="changeName()">
-            <select name="characterName">
+            <div class="form-group">
+            <label>Old Character Name:</label>
+            <select class="form-control" name="characterName">
                     <option :value="item.name" :id="item.id" v-for="item in characters" :key="item.id">{{item.name}}</option>
             </select>
+            </div>
+            <div class="form-group">
             <label>New Name:</label>
-            <input name="newNewName"/>
-            <input type="submit"/>
+            <input class="form-control" name="newNewName"/>
+            </div>
+            <input class="btn btn-primary" type="submit"/>
         </form>
     </div>
 </template>

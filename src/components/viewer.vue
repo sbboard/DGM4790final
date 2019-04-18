@@ -1,14 +1,14 @@
 <template>
-    <div>
-        <div v-for="item in characters" :key="item.id" :id="item.id">
+    <div class="card-columns">
+        <div class="card" v-for="item in characters" :key="item.id" :id="item.id">
             <template v-if="item.thumbnailImg != null">
-                <img :src="item.thumbnailImg" :alt="item.name"/>
+                <img class="card-img-top" :src="item.thumbnailImg" :alt="item.name"/>
             </template>
             <template v-else>
-                <img src="https://www.my-vb.com/img/assets/missing_image.jpg" :alt="item.name"/>
+                <img class="card-img-top" src="https://www.my-vb.com/img/assets/missing_image.jpg" :alt="item.name"/>
             </template>
-            <div class="crossBar">Name: {{item.name}}</div> 
-            <div class="crossBar">Series: <span :id="item.name" class="seriesSpan">Undefined</span></div>            
+            <h5 class="card-title">Name: {{item.name}}</h5> 
+            <p class="card-text">Series: <span :id="item.name" class="seriesSpan">Undefined</span></p>            
         </div>
     </div>
 </template>
