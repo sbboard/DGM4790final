@@ -220,8 +220,13 @@ async function getMovements(characterName){
 }
 
 function imgFix(img){
-  const splitString = img.split("http://kuroganehammer.com/")
-  return `http://kuroganehammer.com/images/${splitString[1]}`
+  if(img.includes("bcDEunC.png")){
+    return 'http://i.imgur.com/bcDEunC.png'
+  }
+  else{
+    const splitString = img.split("http://kuroganehammer.com/")
+    return `http://kuroganehammer.com/images/${splitString[1]}`
+  }
 }
 
 main().catch(e => console.error(e))
