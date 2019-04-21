@@ -33,7 +33,7 @@
         <form @submit.prevent="assign()">
             <div class="form-group">
             <label>Unassigned Character</label>
-            <select class="form-control" name="assignSeries">
+            <select class="form-control" name="assignCharacterNoSeries">
                 <option v-for="item in unassignedCharacters" :key="item._id">{{item}}</option>
             </select>
             </div>
