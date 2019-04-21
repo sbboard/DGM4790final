@@ -3,45 +3,58 @@
         <h1>Series Manager</h1>
         <h2>Create Series</h2>
         <form @submit.prevent="create()">
+            <div class="form-group">
             <label>Series Name</label>
-            <input name="name" required/>
+            <input class="form-control" name="name" required/>
+            </div>
+            <div class="form-group">
             <label>Debut Year</label>
-            <input name="debutYear" type="number" required/>
+            <input class="form-control" name="debutYear" type="number" required/>
+            </div>
+            <div class="form-group">
             <label>First Smash</label>
-            <select name="firstSmash" required>
+            <select class="form-control" name="firstSmash" required>
                 <option value='1'>Super Smash Bros 64</option>
                 <option value='2'>Super Smash Bros Melee</option>
                 <option value='3'>Super Smash Bros Brawl</option>
                 <option value='4'>Super Smash Bros 4</option>
                 <option value='5'>Super Smash Bros Ultimate</option>
             </select>
+            </div>
+            <div class="form-group">
             <label>Nintendo Property?</label>
             <input type="radio" name="firstParty" value="true" checked="checked"> Yes<br/>
             <input type="radio" name="firstParty" value="false"> No<br/>
-            <input type="submit"/>
+            </div>
+            <input class="btn btn-primary" type="submit"/>
         </form>
 
         <h2>Assign Character to Series</h2>
         <form @submit.prevent="assign()">
+            <div class="form-group">
             <label>Unassigned Character</label>
-            <select name="assignSeries">
+            <select class="form-control" name="assignSeries">
                 <option v-for="item in unassignedCharacters" :key="item._id">{{item}}</option>
             </select>
-            
+            </div>
+            <div class="form-group">
             <label>Assign to...</label>
-            <select name="assignSeries">
+            <select class="form-control" name="assignSeries">
                 <option :value="item.name" v-for="item in listOfSeries" :key="item._id">{{item.name}}</option>
             </select>
-            <input type="submit"/>
+            </div>
+            <input class="btn btn-primary" type="submit"/>
         </form>
 
         <h2>Series Deletion Tool</h2>
         <form @submit.prevent="deleteTool()">
+            <div class="form-group">
             <label>Series</label>
-            <select name="deleteSeries">
+            <select class="form-control" name="deleteSeries">
                 <option :value="item._id" v-for="item in listOfSeries" :key="item._id">{{item.name}}</option>
             </select>
-            <input type="submit"/>
+            </div>
+            <input class="btn btn-primary" type="submit"/>
         </form>
     </div>
 </template>
