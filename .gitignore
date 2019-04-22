@@ -1,10 +1,6 @@
 .DS_Store
 node_modules
 /dist
-
-backend_nodejs/secret.js
-mondopass.js
-
 # local env files
 .env.local
 .env.*.local
@@ -91,7 +87,6 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)

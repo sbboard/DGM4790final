@@ -21,10 +21,11 @@
                 <option value='5'>Super Smash Bros Ultimate</option>
             </select>
             </div>
-            <div class="form-group">
-            <label>Nintendo Property?</label>
-            <input type="radio" name="firstParty" value="true" checked="checked"> Yes<br/>
-            <input type="radio" name="firstParty" value="false"> No<br/>
+            <div class="form-check">
+            <input type="radio" class="form-check-input" name="firstParty" value="true" checked="checked"> <label class="form-check-label" >Nintendo Property</label>
+            </div>
+            <div class="form-check">
+            <input type="radio" class="form-check-input" name="firstParty" value="false"> <label class="form-check-label" >Third-Party Property</label>
             </div>
             <input class="btn btn-primary" type="submit"/>
         </form>
