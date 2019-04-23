@@ -60,9 +60,11 @@ export default {
                 //loop through characters
                 for(let i=0;i<characterArray.length;i++){
                     const characterName = characterArray[i]
-                    document.getElementById(characterName).innerHTML = seriesName
-                    const spaceless = seriesName.replace(/\s/g, '')
-                    document.getElementById(characterName).parentElement.parentElement.classList.add(spaceless);
+                    if(document.getElementById(characterName)){
+                        document.getElementById(characterName).innerHTML = seriesName
+                        const spaceless = seriesName.replace(/\s/g, '')
+                        document.getElementById(characterName).parentElement.parentElement.classList.add(spaceless);
+                    }
                 }
             }
         },
