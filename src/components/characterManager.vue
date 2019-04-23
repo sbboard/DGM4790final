@@ -47,7 +47,6 @@ export default {
         }
     },
     apollo: {
-        // Simple query that will update the 'hello' vue property
         characters: gql`query getCharacterNames{
             characters{
                 name
@@ -72,7 +71,15 @@ export default {
                 variables: {
                     name: newName,
                 },
-            }).then((data) => {
+            refetchQueries:[{
+                query: gql`{
+            characters{
+                name
+                id
+            }
+        }`}]
+            },
+            ).then((data) => {
                 // eslint-disable-next-line
                 console.log(data)
                 document.getElementsByName("newName")[0].value = ""
