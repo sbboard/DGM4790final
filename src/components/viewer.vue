@@ -100,4 +100,8 @@ export default {
     display: flex
     flex-wrap: wrap
     justify-content: center
+.card
+    img
+        width: 255px
+        height: 255px
 </style>
