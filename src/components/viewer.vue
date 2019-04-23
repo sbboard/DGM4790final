@@ -2,7 +2,7 @@
     <div>
         <div class="controls">
             <div class="checkOptions" v-for="series in seriesReturn" :key="series._id">
-                <input type="checkbox" :name="series.name" checked @click="toggle(series.name)"> {{series.name}} ({{series.characters.length}})
+                <input type="checkbox" :name="series.name" checked @click="toggle(series.name)"> {{series.name}}
             </div>
             <div class="checkOptions">
                 <input type="checkbox" checked @click="toggleUndefined()"> Unassigned
