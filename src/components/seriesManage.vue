@@ -2,7 +2,7 @@
     <div>
         <h1>Series Manager</h1>
         <h2>Create Series</h2>
-        <form @submit.prevent="create()">
+        <form @submit.prevent="create()" class="mb-1">
             <div class="form-group">
             <label>Series Name</label>
             <input class="form-control" name="name" required/>
@@ -29,9 +29,12 @@
             </div>
             <input class="btn btn-primary" type="submit"/>
         </form>
+        <div class="alert alert-info" role="alert" v-if='this.notification[0] != ""'>
+        {{this.notification[0]}}
+        </div>
 
         <h2>Assign Character to Series</h2>
-        <form @submit.prevent="assign()">
+        <form @submit.prevent="assign()" class="mb-1">
             <div class="form-group">
             <label>Unassigned Character</label>
             <select class="form-control" name="assignCharacterNoSeries">
@@ -46,9 +49,12 @@
             </div>
             <input class="btn btn-primary" type="submit"/>
         </form>
+        <div class="alert alert-info" role="alert" v-if='this.notification[1] != ""'>
+        {{this.notification[1]}}
+        </div>
 
         <h2>Series Deletion Tool</h2>
-        <form @submit.prevent="deleteTool()">
+        <form @submit.prevent="deleteTool()" class="mb-1">
             <div class="form-group">
             <label>Series</label>
             <select class="form-control" name="deleteSeries">
@@ -57,6 +63,9 @@
             </div>
             <input class="btn btn-primary" type="submit"/>
         </form>
+        <div class="alert alert-info" role="alert" v-if='this.notification[2] != ""'>
+        {{this.notification[2]}}
+        </div>
     </div>
 </template>
 
@@ -70,7 +79,8 @@ export default {
             listOfSeries: [],
             characters: [],
             listOfCharactersAssigned: [],
-            unassignedCharacters: []
+            unassignedCharacters: [],
+            notification: ["","",""]
         }
     },
     mounted () {
@@ -88,9 +98,14 @@ export default {
                     this.unassignedCharacters.push(this.characters[i].name)
                 }
             }
-        }
+        },
     },
     methods:{
+        waitThenChange(){
+            setTimeout(function () {
+                this.notification = ["","",""]
+            }.bind(this), 4000)
+        },
         getSeries(){
             axios.get(`http://192.168.56.1:8666/api/list/series`).then(response => (this.listOfSeries = response.data))
         },
@@ -112,6 +127,8 @@ export default {
             .then(response => {
                 // eslint-disable-next-line
                 console.log(response.data)
+                this.notification[0] = response.data
+                this.waitThenChange()
                 this.getSeries()
                 document.getElementsByName("name")[0].value = ""
                 document.getElementsByName("debutYear")[0].value = ""
@@ -130,13 +147,13 @@ export default {
                 character: character
             })
             .then(response => {
-                // eslint-disable-next-line
-                console.log(response.data)
+                this.notification[1] = response.data
+                this.waitThenChange()
+                this.getSeries()
             })
             .catch(error => {
                 // eslint-disable-next-line
                 console.log(error.message);
-                this.getSeries()
             })
         },
         deleteTool(){
@@ -145,6 +162,8 @@ export default {
             .then(response => {
                 // eslint-disable-next-line
                 console.log(response.data)
+                this.notification[2] = response.data
+                this.waitThenChange()
                 this.getSeries()
             })
         },
