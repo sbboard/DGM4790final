@@ -9,6 +9,10 @@
             </div>
             <input class="btn btn-primary" type="submit"/>
         </form>
+        <div class="alert alert-info" role="alert" v-if='this.notification[0] != ""'>
+        {{this.notification[0]}}
+        </div>
+
         <h2 class="my-4">Delete Character</h2>
         <form @submit.prevent="deleteCharacter()">
             <div class="form-group">
@@ -19,6 +23,10 @@
             </div>
             <input class="btn btn-primary" type="submit"/>
         </form>
+        <div class="alert alert-info" role="alert" v-if='this.notification[1] != ""'>
+        {{this.notification[1]}}
+        </div>
+        
         <h2 class="my-4">Change Character Name</h2>
         <form @submit.prevent="changeName()">
             <div class="form-group">
@@ -33,6 +41,10 @@
             </div>
             <input class="btn btn-primary" type="submit"/>
         </form>
+        <div class="alert alert-info" role="alert" v-if='this.notification[2] != ""'>
+        {{this.notification[2]}}
+        </div>
+        
     </div>
 </template>
 
@@ -43,7 +55,8 @@ import gql from 'graphql-tag'
 export default {
     data(){
         return{
-            characters: []
+            characters: [],
+            notification: ["","",""]
         }
     },
     apollo: {
@@ -55,6 +68,11 @@ export default {
         }`,
     },
     methods: {
+        waitThenChange(){
+            setTimeout(function () {
+                this.notification = ["","",""]
+            }.bind(this), 4000)
+        },
         createCharacter(){
             const newName= document.getElementsByName("newName")[0].value
             // Mutation
@@ -77,11 +95,12 @@ export default {
                 name
                 id
             }
-        }`}]
-            },
-            ).then((data) => {
+            }`}]
+            }).then((data) => {
                 // eslint-disable-next-line
-                console.log(data)
+                console.error(data)
+                this.notification[0] = "character created"
+                this.waitThenChange()
                 document.getElementsByName("newName")[0].value = ""
             }).catch((error) => {
                 // eslint-disable-next-line
@@ -103,10 +122,16 @@ export default {
                 variables: {
                     name: deleteName,
                 },
+            refetchQueries:[{
+                query: gql`{
+            characters{
+                name
+                id
+            }
+            }`}]
             }).then((data) => {
-                // eslint-disable-next-line
-                console.log(data.data.deleteCharacter.id)
-                //console.log(document.getElementById(data.id))
+                this.notification[1] = "character deleted"
+                this.waitThenChange()
                 document.getElementById(data.data.deleteCharacter.id).remove()
             }).catch((error) => {
                 // eslint-disable-next-line
@@ -133,10 +158,19 @@ export default {
                     newName: newName,
                     oldName: oldName
                 },
+            refetchQueries:[{
+                query: gql`{
+            characters{
+                name
+                id
+            }
+            }`}]
             }).then((data) => {
                 // eslint-disable-next-line
                 console.error(data)
                 //document.getElementById(data.data.deleteCharacter.id).innerHTML = newName
+                this.notification[2] = "name changed"
+                this.waitThenChange()
                 document.getElementsByName("newNewName")[0].value = ""
             }).catch((error) => {
                 // eslint-disable-next-line
