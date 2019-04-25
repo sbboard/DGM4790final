@@ -91,16 +91,15 @@ export default {
         // Simple query that will update the 'hello' vue property
         characters: gql`query getCharacterNames{characters{name}}`,
     },
-    watch: {
-        characters(){
+    methods:{
+        listOfCharacterAssigned(){
+            this.unassignedCharacters = []
             for(let i=0; i<this.characters.length;i++){
                 if(this.listOfCharactersAssigned.indexOf(this.characters[i].name) < 0){
                     this.unassignedCharacters.push(this.characters[i].name)
                 }
             }
         },
-    },
-    methods:{
         waitThenChange(){
             setTimeout(function () {
                 this.notification = ["","",""]
@@ -110,7 +109,11 @@ export default {
             axios.get(`http://192.168.56.1:8666/api/list/series`).then(response => (this.listOfSeries = response.data))
         },
         getAssignedCharacters(){
-            axios.get(`http://192.168.56.1:8666/api/list/characters`).then(response => (this.listOfCharactersAssigned = response.data))
+            axios.get(`http://192.168.56.1:8666/api/list/characters`)
+            .then((response) => {
+                this.listOfCharactersAssigned = response.data
+                this.listOfCharacterAssigned()
+            })
         },
         create(){
             const name= document.getElementsByName("name")[0].value
@@ -149,6 +152,7 @@ export default {
             .then(response => {
                 this.notification[1] = response.data
                 this.waitThenChange()
+                this.getAssignedCharacters()
                 this.getSeries()
             })
             .catch(error => {
