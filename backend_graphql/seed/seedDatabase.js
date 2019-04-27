@@ -110,10 +110,6 @@ async function main() {
             characterVariables.thumbnailImg = imgFix(data[key].ThumbnailUrl)
             characterVariables.colorTheme = data[key].ColorTheme
             await client.request(characterMutation, characterVariables).then(data => console.log(data)).catch(err => console.log(`${err}`))
-            //get moves
-            await getMoves(data[key].Name)
-            //get movements
-            await getMovements(data[key].Name)
           }
         }); 
   })

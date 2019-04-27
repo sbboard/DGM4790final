@@ -5,33 +5,4 @@ type Character {
   mainImgUrl: String
   thumbnailImg: String
   colorTheme: String
-  moveInfo: [Moves!]!
-  movementsInfo: [Movements!]!
-}
-
-type Moves {
-  id: ID! @unique
-  name: String!
-  user: Character!
-  hitBoxActive: String
-  firstActionableFrame: Int
-  baseDmg: Int
-  angle: Int
-  baseKnockBackSetKnockback: Int
-  landingLag: Int
-  autoCancel: String
-  knockbackGrowth: Int
-  moveType: String
-  isWeightDependent: Boolean
-}
-
-type Movements {
-  id: ID! @unique
-  user: Character!
-  weight: String
-  maxJumps: String
-  wallJump: String
-  wallCling: String
-  crawl: String
-  airSpeed: String
 }
